@@ -1,1 +1,4 @@
 # EnigmaRust
+
+### Start 
+- > $ cargo run
