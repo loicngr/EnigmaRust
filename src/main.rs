@@ -2,6 +2,7 @@ extern crate rand;
 
 use std::io;
 use rand::Rng;
+use std::env;
 
 fn try_again( generated_nbr: i128, max_try_count: u8 ) -> String {
 	let mut count: u8 = 0;
@@ -28,7 +29,10 @@ fn try_again( generated_nbr: i128, max_try_count: u8 ) -> String {
 					break;
 				}
 			}
-			Err(error) => println!(" > [ERREUR] {}", error),
+			Err(error) => {
+				println!(" > [ERREUR] {}", error);
+				break;
+			}
 		}
 
 		count += 1;
@@ -37,19 +41,28 @@ fn try_again( generated_nbr: i128, max_try_count: u8 ) -> String {
 }
 
 fn main() {
-	let debug: bool = false;
+	let args: Vec<String> = env::args().collect();
 
-	let mut rng = rand::thread_rng();
+	let mut min: i128 = 0;
+	let mut max: i128 = 100;
 
-	let generated_nbr = rng.gen_range(0, 100);
-	let max_try_count: u8 = 10;
-
-	if debug == true {
-		println!(" > [DEBUG] nombre généré : {}", generated_nbr);
+	let len = args.len();
+	if len >= 3 {
+		match args[1].trim().parse::<i128>() {
+			Ok(i) => { min = i; }
+			Err(error) => { println!(" > [ERREUR] {}", error); }
+		}
+		match args[2].trim().parse::<i128>() {
+			Ok(i) => { max = i; }
+			Err(error) => { println!(" > [ERREUR] {}", error); }
+		}
 	}
-	println!("Entre un nombre entre {} et {} :", 0, 100);
 
-	let result = try_again(generated_nbr, max_try_count);
+	let generated_nbr = rand::thread_rng().gen_range(min, max);
+
+	println!("Entre un nombre entre {} et {} :", min, max);
+
+	let result = try_again(generated_nbr, 10u8);
 	println!(" > {}", result);
 	println!(" > Le nombre gagnant était : {}.", generated_nbr);
 }
