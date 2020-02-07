@@ -5,10 +5,9 @@ use rand::Rng;
 use std::env;
 
 fn try_again( generated_nbr: u32, max_try_count: u32 ) -> String {
-	let mut count: u32 = 0;
-	let mut _game_output = String::new();
+	let mut game_output = String::new();
 	
-	while count < max_try_count {
+	for x in 1..=max_try_count {
 		let mut input = String::new();
 		io::stdin()
         	.read_line(&mut input)
@@ -20,7 +19,7 @@ fn try_again( generated_nbr: u32, max_try_count: u32 ) -> String {
 				if i > generated_nbr { print("Trop haut!".to_string(), 1);  }
 				else if i < generated_nbr { print("Trop bas!".to_string(), 1);  }
 				else if i == generated_nbr {
-					_game_output = String::from("Bravo !");
+					game_output = String::from("Bravo !");
 					break;
 				}
 			}
@@ -29,11 +28,9 @@ fn try_again( generated_nbr: u32, max_try_count: u32 ) -> String {
 				break;
 			}
 		}
-
-		count += 1;
-		if count >= max_try_count { _game_output = String::from("Nombre de tentatives possible dépassé."); }
+		if x >= max_try_count { game_output = String::from("Nombre de tentatives possible dépassé."); }
 	}
-	_game_output
+	game_output
 }
 
 fn print( str: String, type_str: u8 ) {
