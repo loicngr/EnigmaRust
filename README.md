@@ -1,7 +1,15 @@
 # EnigmaRust
 
+
+### Build
+- > cargo build --target=x86_64-unknown-linux-musl --release
+
+### Add linux target
+- > rustup target add x86_64-unknown-linux-musl
+
 ### Start 
-- > $ cargo run
+- > ./enigma-rust
 
 ### Start with min and max value range
-- > $ cargo run 0 100
+- > ./enigma-rust (min) (max) (max try count)
+- > ./enigma-rust 0 100 10
