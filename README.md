@@ -13,3 +13,7 @@
 ### Start with min and max value range
 - > ./enigma-rust (min) (max) (max try count)
 - > ./enigma-rust 0 100 10
+
+### Permission denied ?
+- > sudo chmod +x enigma-rust
+- > ./enigma-rust
